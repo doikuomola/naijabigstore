@@ -1,0 +1,452 @@
+{% load static %}
+
+<header class="header">
+    <div class="header-top">
+        
+        {% for flashdeal in products %}
+            
+            
+        {% if flashdeal.flash_deal %}
+        <a href="{{ product.get_absolute_url }}">
+            <img src="{{ flashdeal.thumbnail.url }}" width="20px">
+            <h3><a href="#">{{ flashdeal.name }}</a></h3>
+            <span class="skew-box product-price">&#8358;{{ flashdeal.discount_price }}</span>
+            <span class="old-price">&#8358;{{ flashdeal.price }}</span>
+        </a>
+        <div id="event" style="display: none">
+            {{ flashdeal.flash_deal_end_date|date:"M d, Y H:m:s" }}
+        </div>
+        <h4>OFFER ENDS IN:</h4>
+        <div id="countdown" class="font-weight-bolder" style="font-weight: bold"></div>
+        <div id="ended" class="text-danger" style="font-weight: bold"></div>
+        
+        
+        {% endif %}
+        {% endfor %}
+
+        <script>
+            const eventBox = document.getElementById("event");
+            const eventStuff = document.getElementById("countdown");
+            const eventEnded = document.getElementById("ended");
+            // console.log(eventBox.textContent)
+            const eventDate = Date.parse(eventBox.textContent);
+            // console.log(eventDate)
+    
+            setInterval(() => {
+                const now = new Date().getTime();
+                // console.log(now)
+    
+                const diff = eventDate - now;
+                // console.log(diff)
+    
+                const d = Math.floor(
+                    eventDate / (1000 * 60 * 60 * 24) -
+                    now / (1000 * 60 * 60 * 24)
+                );
+                const h = Math.floor(
+                    (eventDate / (1000 * 60 * 60) - now / (1000 * 60 * 60)) % 24
+                );
+                const m = Math.floor(
+                    (eventDate / (1000 * 60) - now / (1000 * 60)) % 60
+                );
+                const s = Math.floor((eventDate / 1000 - now / 1000) % 60);
+                console.log(s);
+    
+                if (diff > 0) {
+                    eventStuff.innerHTML =
+                        d +
+                        " days, " +
+                        h +
+                        " hours " +
+                        m +
+                        " minutes " +
+                        s +
+                        " seconds";
+                } else {
+                    eventEnded.innerHTML = "DEAL has ended!";
+                }
+            }, 1000);
+        </script>
+    </div>
+    <!-- <div class="product-slider owl-carousel owl-theme" data-toggle="owl"> -->
+        <!-- {% for flashdeal in products %} {% if flashdeal.flash_deal %} -->
+<!--  -->
+        <!-- <div class="product-slide"> -->
+            <!-- <h3>Flash Deals</h3> -->
+            <!-- <div class="product-default"> -->
+                <!-- <figure> -->
+                    <!-- <a href="#"> -->
+                        <!-- <img src="{{ flashdeal.thumbnail.url }}" class="w-50" /> -->
+                    <!-- </a> -->
+                <!-- </figure> -->
+                <!-- <div class="product-details"> -->
+                    <!-- <h2 class="product-title"> -->
+                        <!-- <a href="#">{{ flashdeal.product_name }}</a> -->
+                    <!-- </h2> -->
+                    <!-- <div class="ratings-container"> -->
+                        <!-- <div class="product-ratings"> -->
+                            <!-- <span class="ratings" style="width: 100%"></span>End .ratings -->
+                            <!-- <span class="tooltiptext tooltip-top"></span> -->
+                        <!-- </div> -->
+                        <!-- End .product-ratings -->
+                    <!-- </div> -->
+                    <!-- End .product-container -->
+                    <!-- <div class="price-box"> -->
+                        <!-- <span class="old-price">&#8358;{{ flashdeal.product_price }}</span> -->
+                        <!-- <span class="product-price">&#8358;{{ flashdeal.product_discount_price }}</span> -->
+                    <!-- </div> -->
+                    <!-- End .price-box -->
+                <!-- </div> -->
+                <!-- End .product-details -->
+            <!-- </div> -->
+            <!-- <div class="count-down-panel text-center text-success"> -->
+                <!-- <div class="spinner-border" role="status"> -->
+                    <!-- <span class="sr-only">Loading...</span> -->
+                <!-- </div> -->
+                <!-- <div id="event" style="display: none"> -->
+                    <!-- {{ flashdeal.flash_deal_end_date|date:"M d, Y H:m:s" }} -->
+                <!-- </div> -->
+                <!-- <h4>OFFER ENDS IN:</h4> -->
+                <!-- <div id="countdown" class="font-weight-bolder" style="font-weight: bold"></div> -->
+                <!-- <div id="ended" class="text-danger" style="font-weight: bold"></div> -->
+<!--  -->
+            <!-- </div> -->
+        <!-- </div> -->
+<!--  -->
+        <!-- {% endif %} -->
+        <!-- {% empty %} -->
+        <!-- <h3>There is Flash Deal Yet!</h3> -->
+        <!-- {% endfor %} -->
+    <!-- </div> -->
+    <!-- <script> -->
+        <!-- const eventBox = document.getElementById("event"); -->
+        <!-- const eventStuff = document.getElementById("countdown"); -->
+        <!-- const eventEnded = document.getElementById("ended"); -->
+        <!-- // console.log(eventBox.textContent) -->
+        <!-- const eventDate = Date.parse(eventBox.textContent); -->
+        <!-- // console.log(eventDate) -->
+<!--  -->
+        <!-- setInterval(() => { -->
+            <!-- const now = new Date().getTime(); -->
+            <!-- // console.log(now) -->
+<!--  -->
+            <!-- const diff = eventDate - now; -->
+            <!-- // console.log(diff) -->
+<!--  -->
+            <!-- const d = Math.floor( -->
+                <!-- eventDate / (1000 * 60 * 60 * 24) - -->
+                <!-- now / (1000 * 60 * 60 * 24) -->
+            <!-- ); -->
+            <!-- const h = Math.floor( -->
+                <!-- (eventDate / (1000 * 60 * 60) - now / (1000 * 60 * 60)) % 24 -->
+            <!-- ); -->
+            <!-- const m = Math.floor( -->
+                <!-- (eventDate / (1000 * 60) - now / (1000 * 60)) % 60 -->
+            <!-- ); -->
+            <!-- const s = Math.floor((eventDate / 1000 - now / 1000) % 60); -->
+            <!-- console.log(s); -->
+<!--  -->
+            <!-- if (diff > 0) { -->
+                <!-- eventStuff.innerHTML = -->
+                    <!-- d + -->
+                    <!-- " days, " + -->
+                    <!-- h + -->
+                    <!-- " hours " + -->
+                    <!-- m + -->
+                    <!-- " minutes " + -->
+                    <!-- s + -->
+                    <!-- " seconds"; -->
+            <!-- } else { -->
+                <!-- eventEnded.innerHTML = "DEAL has ended!"; -->
+            <!-- } -->
+        <!-- }, 1000); -->
+    <!-- </script> -->
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler" type="button">
+                    <i class="icon-menu"></i>
+                </button>
+                <a href="/" class="logo">
+                    <img src="{% static 'assets/images/logo.png' %}" alt="Naija Mega Store">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search">
+                    <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
+                    <form action="#" method="get">
+                        <div class="header-search-wrapper">
+                            <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..."
+                                required>
+                            <div class="select-custom">
+                                <select id="cat" name="cat">
+                                    <option value="">All Categories</option>
+
+                                    {% for c in categories %}
+                                    <option {% if category.slug == c.slug %}class='selected' {% endif %}>{{ category }}
+                                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                                    </option>
+
+                                    {% endfor %}
+                                </select>
+                            </div><!-- End .select-custom -->
+                            <button class="btn" type="submit"><i class="icon-magnifier"></i></button>
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </div><!-- End .header-search -->
+
+                <!-- <div class="links">
+                    <a href="#">tablet</a>
+                    <a href="#">smartphone</a>
+                    <a href="#">smartwatch</a>
+                    <a href="#">ipcamera</a>
+                    <a href="#">box</a>
+                    <a href="#">smart</a>
+                    <a href="#">portable</a>
+                </div> -->
+            </div><!-- End .headeer-center -->
+
+            <div class="header-right">
+                <a href="login.html">
+                    <div class="header-user">
+                        <i class="icon-user-2"></i>
+                        <div class="header-userinfo">
+                            <span>Hello!</span>
+                            <h4>My Account</h4>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="porto-icon"><i class="icon icon-heart"></i></a>
+
+                <div class="dropdown cart-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" data-display="static">
+                        <i class="minicart-icon"></i>
+                        <span class="cart-count">2</span>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <div class="dropdownmenu-wrapper">
+                            <div class="dropdown-cart-header">
+                                <span>2 Items</span>
+
+                                <a href="cart.html">View Cart</a>
+                            </div><!-- End .dropdown-cart-header -->
+                            <div class="dropdown-cart-products">
+                                <div class="product">
+                                    <div class="product-details">
+                                        <h4 class="product-title">
+                                            <a href="product.html">Woman Ring</a>
+                                        </h4>
+
+                                        <span class="cart-product-info">
+                                            <span class="cart-product-qty">1</span>
+                                            x $99.00
+                                        </span>
+                                    </div><!-- End .product-details -->
+
+                                    <figure class="product-image-container">
+                                        <a href="product.html" class="product-image">
+                                            <img src="{% static 'assets/images/products/cart/product-1.jpg' %}"
+                                                alt="product">
+                                        </a>
+                                        <a href="#" class="btn-remove" title="Remove Product"><i
+                                                class="icon-retweet"></i></a>
+                                    </figure>
+                                </div><!-- End .product -->
+
+                                <div class="product">
+                                    <div class="product-details">
+                                        <h4 class="product-title">
+                                            <a href="product.html">Woman Necklace</a>
+                                        </h4>
+
+                                        <span class="cart-product-info">
+                                            <span class="cart-product-qty">1</span>
+                                            x $35.00
+                                        </span>
+                                    </div><!-- End .product-details -->
+
+                                    <figure class="product-image-container">
+                                        <a href="product.html" class="product-image">
+                                            <img src="{% static 'assets/images/products/cart/product-2.jpg' %}"
+                                                alt="product">
+                                        </a>
+                                        <a href="#" class="btn-remove" title="Remove Product"><i
+                                                class="icon-retweet"></i></a>
+                                    </figure>
+                                </div><!-- End .product -->
+                            </div><!-- End .cart-product -->
+
+                            <div class="dropdown-cart-total">
+                                <span>Total</span>
+
+                                <span class="cart-total-price">$134.00</span>
+                            </div><!-- End .dropdown-cart-total -->
+
+                            <div class="dropdown-cart-action">
+                                <a href="checkout-shipping.html" class="btn btn-block">Checkout</a>
+                            </div><!-- End .dropdown-cart-total -->
+                        </div><!-- End .dropdownmenu-wrapper -->
+                    </div><!-- End .dropdown-menu -->
+                </div><!-- End .dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+
+    <div class="header-bottom">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="menu-depart">
+                    <a href="#"><i class="icon-menu"></i>Shop by Category</a>
+                    <div class="submenu opened">
+
+
+
+
+                        <!-- <a href="category.html"><i class="icon-category-electronics"></i>Electronics</a>
+                        <a href="category.html"><i class="icon-category-gifts"></i>Gifts</a>
+                        <a href="category.html"><i class="icon-category-garden"></i>Garden</a>
+                        <a href="category.html"><i class="icon-category-music"></i>Music</a>
+                        <a href="category.html"><i class="icon-category-motors"></i>Motors</a>
+                        <a href="category.html"><i class="icon-category-furniture"></i>Furniture</a>
+                        <a href="category.html">VIEW ALL <i class="icon-angle-right"></i></a> -->
+                    </div>
+                </div>
+                <ul class="menu">
+                    <li><a href="/" class="active">Home</a></li>
+                    <li>
+                        <a href="category.html">Categories</a>
+                        <div class="megamenu megamenu-fixed-width">
+                            <div class="row row-sm">
+                                <div class="col-lg-4">
+                                    <ul class="submenu">
+
+                                        
+                                    </ul>
+                                </div>
+                                <!-- <div class="col-lg-4">
+                                    <a href="#" class="nolink">VARIATION 2</a>
+                                    <ul class="submenu">
+                                        <li><a href="#">Product List Item Types</a></li>
+                                        <li><a href="category-infinite-scroll.html">Ajax Infinite Scroll</a></li>
+                                        <li><a href="category-3col.html">3 Columns Products</a></li>
+                                        <li><a href="category.html">4 Columns Products</a></li>
+                                        <li><a href="category-5col.html">5 Columns Products</a></li>
+                                        <li><a href="category-6col.html">6 Columns Products</a></li>
+                                        <li><a href="category-7col.html">7 Columns Products</a></li>
+                                        <li><a href="category-8col.html">8 Columns Products</a></li>
+                                    </ul>
+                                </div> -->
+                                <!-- <div class="col-lg-4 image-container">
+                                    <img src="{% static 'assets/images/menu-banner-2.jpg' %}" align="Menu banner">
+                                </div> -->
+                            </div>
+                        </div><!-- End .megamenu -->
+                    </li>
+                    <li class="">
+                        <a href="product.html">Products</a>
+                        <div class="megamenu">
+                            <div class="row row-sm">
+                                <div class="col-lg-3">
+                                    <a href="#" class="nolink">Variations 1</a>
+                                    <ul class="submenu">
+                                        <li><a href="product.html">Horizontal Thumbnails</a></li>
+                                        <li><a href="product-full-width.html">Vertical Thumbnails</a></li>
+                                        <li><a href="product.html">Inner Zoom</a></li>
+                                        <li><a href="product-addcart-sticky.html">Addtocart Sticky</a></li>
+                                        <li><a href="product-sidebar-left.html">Accordion Tabs</a></li>
+                                    </ul>
+                                </div><!-- End .col-lg-4 -->
+                                <div class="col-lg-3">
+                                    <a href="#" class="nolink">Variations 2</a>
+                                    <ul class="submenu">
+                                        <li><a href="product-sticky-tab.html">Sticky Tabs</a></li>
+                                        <li><a href="product-simple.html">Simple Product</a></li>
+                                        <li><a href="product-sidebar-left.html">With Left Sidebar</a></li>
+                                    </ul>
+                                </div><!-- End .col-lg-4 -->
+                                <div class="col-lg-3">
+                                    <a href="#" class="nolink">Product Layout Types</a>
+                                    <ul class="submenu">
+                                        <li><a href="product.html">Default Layout</a></li>
+                                        <li><a href="product-extended-layout.html">Extended Layout</a></li>
+                                        <li><a href="product-full-width.html">Full Width Layout</a></li>
+                                        <li><a href="product-grid-layout.html">Grid Images Layout</a></li>
+                                        <li><a href="product-sticky-both.html">Sticky Both Side Info</a></li>
+                                        <li><a href="product-sticky-info.html">Sticky Right Side Info</a></li>
+                                    </ul>
+                                </div><!-- End .col-lg-4 -->
+
+                                <div class="col-lg-3 image-container">
+                                    <img src="{% static 'assets/images/menu-banner-1.jpg' %}" alt="Menu banner"
+                                        class="product-promo">
+                                </div><!-- End .col-lg-4 -->
+                            </div><!-- End .row -->
+                        </div><!-- End .megamenu -->
+                    </li>
+                    <li class="sf-with-ul">
+                        <a href="#">Pages</a>
+                        <ul>
+                            <li><a href="cart.html">Shopping Cart</a></li>
+                            <li><a href="#">Checkout</a>
+                                <ul>
+                                    <li><a href="checkout-shipping.html">Checkout Shipping</a></li>
+                                    <li><a href="checkout-shipping-2.html">Checkout Shipping 2</a></li>
+                                    <li><a href="checkout-review.html">Checkout Review</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Dashboard</a>
+                                <ul>
+                                    <li><a href="dashboard.html">Dashboard</a></li>
+                                    <li><a href="my-account.html">My Account</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="#">Blog</a>
+                                <ul>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="single.html">Blog Post</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="#" class="login-link">Login</a></li>
+                            <li><a href="forgot-password.html">Forgot Password</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://1.envato.market/DdLk5" target="_blank">Buy Porto!</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-dropdowns">
+                <div class="header-dropdown">
+                    <a href="#" class="link-seller">Become a Seller</a>
+                </div>
+                <div class="header-dropdown">
+                    <a href="#">USD</a>
+                    <div class="header-menu">
+                        <ul>
+                            <li><a href="#">EUR</a></li>
+                            <li><a href="#">USD</a></li>
+                        </ul>
+                    </div><!-- End .header-menu -->
+                </div><!-- End .header-dropown -->
+
+                <div class="header-dropdown">
+                    <a href="#">ENG</a>
+                    <div class="header-menu">
+                        <ul>
+                            <li><a href="#">ENGLISH</a></li>
+                            <li><a href="#">FRENCH</a></li>
+                        </ul>
+                    </div><!-- End .header-menu -->
+                </div><!-- End .header-dropown -->
+            </div><!-- End .header-left -->
+        </div><!-- End .header-bottom -->
+    </div><!-- End .header-bottom -->
+    
+</header>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'store/head.html' %}
+
+{% block scripts %}
+    
+{% endblock scripts %}
+    
+
+<body>
+    <div class="page-wrapper">
+        {% include 'store/header.html' %}
+
+        {% block content %}
+        {% endblock content %}
+
+        {% include 'store/footer.html' %}
+    </div>
+
+    {% include 'store/mobile-menu.html' %}
+
+    {% include 'store/newsletter.html' %}
+
+    {% include 'store/add-cart.html' %}
+
+    {% include 'store/top.html' %}
+
+    {% include 'store/scripts.html' %}
+</body>
+
+</html>

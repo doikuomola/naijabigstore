@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{% if category %}
+{{ category.name }}
+{% else %}
+Products
+{% endif %}
+
+{% endblock title %}
+{% block scripts %}
+<script src="{% static 'assets/js/flashdeal.js' %}"></script>
+{% endblock scripts %}
+{% block content %}
+
+<main class="main home">
+  <div class="container">
+    <div class="row row-sm">
+      <div class="col-lg-9">
+        <div class="home-slider owl-carousel owl-theme" data-toggle="owl" data-owl-options="{
+                    'items' : 1,
+                    'margin' : 0,
+                    'nav' : true,
+                    'dots' : false
+                }">
+
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <ul>
+          <li {% if not category %}class='selected' {% endif %}>
+            <h4><a href="{% url 'store:product_list' %}">All</a></h4>
+          </li>
+          {% for c in categories %}
+          <li {% if category.slug == c.slug %}class='selected' {% endif %}>
+            <h4><a href="{{ c.get_absolute_url }}">{{ c.title }}</a></h4>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-10">
+        <nav class="toolbox mb-4">
+          <div class="toolbox-left">
+            <div class="toolbox-item toolbox-sort">
+              <div class="">
+                <h3>
+
+                  {% if category %}
+                  {{ category.title }}
+                  {% else %}
+                  All Products
+                  {% endif %}
+  
+              </h3>
+              </div><!-- End .select-custom -->
+    
+              <a href="#" class="sorter-btn" title="Set Ascending Direction"><span class="sr-only">Set Ascending
+                  Direction</span></a>
+            </div><!-- End .toolbox-item -->
+          </div><!-- End .toolbox-left -->
+    
+          <div class="toolbox-item toolbox-show">
+            <label>Showing 1–9 of 60 results</label>
+          </div><!-- End .toolbox-item -->
+    
+          <div class="layout-modes">
+            <a href="category.html" class="layout-btn btn-grid active" title="Grid">
+              <i class="icon-mode-grid"></i>
+            </a>
+            <a href="category-list.html" class="layout-btn btn-list" title="List">
+              <i class="icon-mode-list"></i>
+            </a>
+          </div><!-- End .layout-modes -->
+        </nav>
+    
+        <div class="row row-sm">
+          {% for product in products %}
+        <div class="col-10 col-md-2 col-xl-2">
+          <div class="card" style="height: 300px;">
+            <div class="card-body">
+              <div class="product-default inner-quickview inner-icon">
+                <figure>
+                  <a href="{{ product.get_absolute_url }}">
+                    <img 
+                      src="{% if product.thumbnail %}{{ product.thumbnail.url }}{% else %}{% static 'assets/images/no_image.png' %} {% endif%}" style="width: 100px;height: 120px;">
+                  </a>
+                  <div class="label-group">
+                    <span class="product-label label-cut">27% off</span>
+                  </div>
+                  <div class="btn-icon-group">
+                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i
+                        class="icon-bag"></i></button>
+                  </div>
+                  <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                </figure>
+                <div class="product-details">
+                  <div class="category-wrap">
+                    <div class="category-list">
+                      <a href="{{ product.category.get_absolute_url }}" class="product-category">{{ product.category }}</a>
+                    </div>
+                    <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                  </div>
+                  <h2 class="product-title">
+                    <a class="text-wrap" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                  </h2>
+                  <div class="ratings-container">
+                    <div class="product-ratings">
+                      <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                      <span class="tooltiptext tooltip-top"></span>
+                    </div><!-- End .product-ratings -->
+                  </div><!-- End .product-container -->
+                  <div class="price-box">
+                    <span class="old-price">&#8358;{{ product.price }}</span>
+                    <span class="product-price">$49.00</span>
+                  </div><!-- End .price-box -->
+                </div><!-- End .product-details -->
+              </div>
+            </div>
+          </div>
+         
+        </div>
+        {% endfor %}
+    
+        </div>
+        
+      </div>
+    </div>
+    
+
+
+  </div>
+
+  <nav class="toolbox toolbox-pagination">
+    <div class="toolbox-item toolbox-show">
+      <label>Showing 1–9 of 60 results</label>
+    </div><!-- End .toolbox-item -->
+
+    <ul class="pagination">
+      <li class="page-item disabled">
+        <a class="page-link page-link-btn" href="#"><i class="icon-angle-left"></i></a>
+      </li>
+      <li class="page-item active">
+        <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><span>...</span></li>
+      <li class="page-item"><a class="page-link" href="#">15</a></li>
+      <li class="page-item">
+        <a class="page-link page-link-btn" href="#"><i class="icon-angle-right"></i></a>
+      </li>
+    </ul>
+  </nav>
+  </div>
+
+</main>
+<!-- End .main -->
+{% endblock content %}

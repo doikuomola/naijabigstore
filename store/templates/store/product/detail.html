@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock title %}
+{% block content %}
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index-2.html"><i class="icon-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Products</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav>
+    <div class="container">
+        <div class="row row-sm">
+            <div class="col-lg-9 col-xl-10">
+                <div class="product-single-container product-single-default">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 product-single-gallery">
+                            <div class="product-slider-container product-item">
+                                <div class="product-single-carousel owl-carousel owl-theme">
+                                    <div class="product-item">
+                                        <img class="product-single-image"
+                                            src="{% if product.thumbnail %} {{ product.thumbnail.url }} {% else %} {% static 'no_image.png' %} {% endif %}"
+                                            data-zoom-image="{% if product.thumbnail %} {{ product.thumbnail.url }} {% else %} {% static 'no_image.png' %} {% endif %}" />
+                                    </div>
+                                </div>
+                                <!-- End .product-single-carousel -->
+                                <span class="prod-full-screen">
+                                    <i class="icon-plus"></i>
+                                </span>
+                            </div>
+
+                        </div><!-- End .col-lg-5 -->
+                        <div class="col-lg-7 col-md-6">
+                            <div class="product-single-details">
+                                <h1 class="product-title">{{ product.name }}</h1>
+                                <!-- <div class="ratings-container"> -->
+                                <!-- <div class="product-ratings"> -->
+                                <!-- <span class="ratings" style="width:100%"></span> -->
+                                <!-- </div> -->
+                                <!-- <a href="#" class="rating-link">( 6 Reviews )</a> -->
+                            </div><!-- End .product-container -->
+                            <div class="price-box">
+                                <span class="product-price">&#8358;{{ product.price }}</span>
+                            </div><!-- End .price-box -->
+                            <div class="product-desc">
+                                <p>
+                                    Quantity: <select name="quatity" id="">
+                                        <option value="">1</option>
+                                        <option value="">2</option>
+                                        <option value="">3</option>
+                                        <option value="">4</option>
+                                        <option value="">5</option>
+                                        <option value="">6</option>
+                                        <option value="">7</option>
+                                        <option value="">8</option>
+                                        <option value="">9</option>
+                                        <option value="">10</option>
+                                    </select>
+                                </p>
+                            </div><!-- End .product-desc -->
+
+                            <div class="product-action product-all-icons">
+                                <a href="cart.html" class="paction add-cart" title="Add to Cart">
+                                    Add to Bag
+                                </a>
+                            </div>
+                            <div class="row mt-5">
+                                <h4>Description</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In quis iste expedita ea. Amet voluptate, suscipit ipsum blanditiis accusamus, ab veniam recusandae impedit eius animi ullam. Totam dolores necessitatibus dolorem!</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main><!-- End .main -->
+{% endblock content %}
