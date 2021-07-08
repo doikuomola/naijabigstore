@@ -1,4 +1,3 @@
-from autoslug import AutoSlugField
 from django.conf import global_settings as settings
 from django.db import models
 from django.db.models.fields import SlugField
@@ -45,7 +44,7 @@ class Seller(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     platform_description = models.TextField()
     platform_logo = models.ImageField(blank=True, null=True)
-    customized_name = AutoSlugField(populate_from='seller_name', max_length=50)
+    customized_name = models.SlugField(max_length=200)
 
     class Meta:
         verbose_name = 'Seller'

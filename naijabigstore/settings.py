@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'store',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -115,6 +117,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 MEDIA_ROOT = os.path.join(VENV_PATH, 'media_root')
+
+
+CART_SESSION_ID = 'cart'
 
 
 # Default primary key field type
