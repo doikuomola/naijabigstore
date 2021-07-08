@@ -14,6 +14,13 @@ Products
 <script src="{% static 'assets/js/flashdeal.js' %}"></script>
 {% endblock scripts %}
 {% block content %}
+<style>
+  div.product-default.inner-quickview.inner-icon figure a img {
+	width: 100%;
+	height: 200px;
+}
+</style>
+
 
 <main class="main home">
   <div class="container">
@@ -62,82 +69,79 @@ Products
                   {% else %}
                   All Products
                   {% endif %}
-  
-              </h3>
+
+                </h3>
               </div><!-- End .select-custom -->
-    
+
               <a href="#" class="sorter-btn" title="Set Ascending Direction"><span class="sr-only">Set Ascending
                   Direction</span></a>
             </div><!-- End .toolbox-item -->
           </div><!-- End .toolbox-left -->
-    
+
           <!-- <div class="toolbox-item toolbox-show"> -->
-            <!-- <label>Showing 1–9 of 60 results</label> -->
+          <!-- <label>Showing 1–9 of 60 results</label> -->
           <!-- </div> -->
-    
+
           <!-- <div class="layout-modes"> -->
-            <!-- <a href="category.html" class="layout-btn btn-grid active" title="Grid"> -->
-              <!-- <i class="icon-mode-grid"></i> -->
-            <!-- </a> -->
-            <!-- <a href="category-list.html" class="layout-btn btn-list" title="List"> -->
-              <!-- <i class="icon-mode-list"></i> -->
-            <!-- </a> -->
+          <!-- <a href="category.html" class="layout-btn btn-grid active" title="Grid"> -->
+          <!-- <i class="icon-mode-grid"></i> -->
+          <!-- </a> -->
+          <!-- <a href="category-list.html" class="layout-btn btn-list" title="List"> -->
+          <!-- <i class="icon-mode-list"></i> -->
+          <!-- </a> -->
           <!-- </div> -->
         </nav>
-    
+
         <div class="row row-sm">
           {% for product in products %}
-        <div class="col-10 col-md-2 col-xl-2">
-          <div class="card" style="height: 300px;">
-            <div class="card-body">
-              <div class="product-default inner-quickview inner-icon">
-                <figure>
-                  <a href="{{ product.get_absolute_url }}">
-                    <img 
-                      src="{% if product.thumbnail %}{{ product.thumbnail.url }}{% else %}{% static 'assets/images/no_image.png' %} {% endif%}" style="width: 100px;height: 120px;">
-                  </a>
-                  <div class="label-group">
-                    <span class="product-label label-cut">27% off</span>
+
+          <div class="col-6 col-md-4 col-xl-2">
+            <div class="product-default inner-quickview inner-icon">
+              <figure>
+                <a href="{{ product.get_absolute_url }}">
+                  <img
+                  src="{% if product.thumbnail %}{{ product.thumbnail.url }}{% else %}{% static 'assets/images/no_image.png' %} {% endif%}">
+                </a>
+                <div class="label-group">
+                  <span class="product-label label-cut">27% off</span>
+                </div>
+                <div class="btn-icon-group">
+                  <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i
+                      class="icon-bag"></i></button>
+                </div>
+                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+              </figure>
+              <div class="product-details">
+                <div class="category-wrap">
+                  <div class="category-list">
+                    <a href="{{ product.category.get_absolute_url }}"
+                      class="product-category">{{ product.category }}</a>
                   </div>
-                  <div class="btn-icon-group">
-                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i
-                        class="icon-bag"></i></button>
-                  </div>
-                  <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
-                </figure>
-                <div class="product-details">
-                  <div class="category-wrap">
-                    <div class="category-list">
-                      <a href="{{ product.category.get_absolute_url }}" class="product-category">{{ product.category }}</a>
-                    </div>
-                    <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
-                  </div>
-                  <h2 class="product-title">
-                    <a class="text-wrap" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                  </h2>
-                  <div class="ratings-container">
-                    <div class="product-ratings">
-                      <span class="ratings" style="width:100%"></span><!-- End .ratings -->
-                      <span class="tooltiptext tooltip-top"></span>
-                    </div><!-- End .product-ratings -->
-                  </div><!-- End .product-container -->
-                  <div class="price-box">
-                    <span class="old-price">&#8358;{{ product.price }}</span>
-                    <span class="product-price">$49.00</span>
-                  </div><!-- End .price-box -->
-                </div><!-- End .product-details -->
-              </div>
+                  <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                </div>
+                <h2 class="product-title">
+                  <a href="product.html">{{ product.name }}</a>
+                </h2>
+                <div class="ratings-container">
+                  <div class="product-ratings">
+                    <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                    <span class="tooltiptext tooltip-top"></span>
+                  </div><!-- End .product-ratings -->
+                </div><!-- End .product-container -->
+                <div class="price-box">
+                  <span class="old-price">$59.00</span>
+                  <span class="product-price">$49.00</span>
+                </div><!-- End .price-box -->
+              </div><!-- End .product-details -->
             </div>
           </div>
-         
+          {% endfor %}
+
         </div>
-        {% endfor %}
-    
-        </div>
-        
+
       </div>
     </div>
-    
+
 
 
   </div>
